@@ -1,0 +1,31 @@
+/* ChatbotWidget.css */
+.widget-chatbot-container {
+    margin-top: -29%;
+    height: 500px;
+  }
+  
+  .widget-chatbot-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  
+  @media (max-width: 768px) {
+    .widget-chatbot-container {
+      height: 400px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .widget-chatbot-container {
+      height: 400px;
+    }
+  }
+  
+  .ufw_2 .ufw_btn {
+    top: 540px;
+    position: fixed;
+    right: 10px;
+    font-size: 14.5px;
+  }
+  
