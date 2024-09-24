@@ -4,6 +4,11 @@ import Context from '../context'
 import displayINRCurrency from '../helpers/displayCurrency'
 import { MdDelete } from "react-icons/md";
 import {loadStripe} from '@stripe/stripe-js';
+import { Link } from 'react-router-dom';
+import HorizontalCardsProducts from '../Components/AllProducts/HorizontalCardsProducts';
+import VerticalCardProduct from '../Components/Categories/VerticalCardsProducts';
+import Footer from '../Components/Footer';
+import VerticalCard from '../Components/AllProducts/VerticalCard';
 
 const Cart = () => {
     const [data,setData] = useState([])
@@ -67,7 +72,7 @@ const Cart = () => {
     }
 
 
-    const decraseQty = async(id,qty) =>{
+    const decreaseQty = async(id,qty) =>{
        if(qty >= 2){
             const response = await fetch(SummaryApi.updateCartProduct.url,{
                 method : SummaryApi.updateCartProduct.method,
@@ -142,94 +147,104 @@ const Cart = () => {
     const totalQty = data.reduce((previousValue,currentValue)=> previousValue + currentValue.quantity,0)
     const totalPrice = data.reduce((preve,curr)=> preve + (curr.quantity * curr?.productId?.sellingPrice) ,0)
   return (
-    <div className='container mx-auto'>
-        
-        <div className='text-center text-lg my-3'>
-            {
-                data.length === 0 && !loading && (
-                    <p className='bg-white py-5'>No Data</p>
-                )
-            }
+    <>
+     <div className="mx-auto mt-12 bg-white max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
+                <h1 className="text-4xl my-5 font-bold tracking-tight text-gray-900">Cart</h1>
+                <div className="flow-root">
+                    {loading ? (
+                        <div>Loading...</div>
+                    ) : (
+                        <ul className="-my-6 divide-y divide-gray-200">
+                            {data.map((item) => (
+                                <li key={item._id} className="flex py-6">
+                                    <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                        <img
+                                            src={item.productId.productImage[0]}
+                                            alt={item.productId.productName}
+                                            className="h-full w-full object-cover object-center"
+                                        />
+                                    </div>
+                                    <div className="ml-4 flex flex-1 flex-col">
+                                        <div className="flex justify-between text-base font-medium text-gray-900">
+                                            <h3>{item.productId.productName}</h3>
+                                            <p className="ml-4">{displayINRCurrency(item.productId.sellingPrice)}</p>
+                                        </div>
+                                        <p className="mt-1 text-sm text-gray-500">{item.productId.category}</p>
+                                        <div className="flex flex-1 items-end justify-between text-sm">
+                                            <div className="flex items-center">
+                                                <label className="inline mr-5 text-sm font-medium leading-6 text-gray-900">Qty</label>
+                                                <div className="flex items-center gap-2">
+                                                    <button
+                                                        className="border border-gray-400 rounded px-2"
+                                                        onClick={() => decreaseQty(item._id, item.quantity)}
+                                                    >
+                                                        -
+                                                    </button>
+                                                    <span>{item.quantity}</span>
+                                                    <button
+                                                        className="border border-gray-400 rounded px-2"
+                                                        onClick={() => increaseQty(item._id, item.quantity)}
+                                                    >
+                                                        +
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div className="flex">
+                                                <button
+                                                    onClick={() => deleteCartProduct(item._id)}
+                                                    type="button"
+                                                    className="font-medium text-indigo-600 hover:text-indigo-500"
+                                                >
+                                                    Remove
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+            </div>
+
+            <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
+                <div className="flex justify-between my-2 text-base font-medium text-gray-900">
+                    <p>Subtotal</p>
+                    <p>{displayINRCurrency(totalPrice)}</p>
+                </div>
+                <div className="flex justify-between my-2 text-base font-medium text-gray-900">
+                    <p>Total Items in Cart</p>
+                    <p>{totalQty} items</p>
+                </div>
+                <div className="mt-6">
+                    <button
+                        onClick={handlePayment}
+                        className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                    >
+                        Checkout
+                    </button>
+                </div>
+                <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
+                    <p>
+                        or
+                        <Link to="/">
+                            <button className="font-medium text-indigo-600 hover:text-indigo-500">
+                                Continue Shopping &rarr;
+                            </button>
+                        </Link>
+                    </p>
+                </div>
+            </div>
         </div>
 
-        <div className='flex flex-col lg:flex-row gap-10 lg:justify-between p-4'>   
-                {/***view product */}
-                <div className='w-full max-w-3xl'>
-                    {
-                        loading ? (
-                            loadingCart?.map((el,index) => {
-                                return(
-                                    <div key={el+"Add To Cart Loading"+index} className='w-full bg-slate-200 h-32 my-2 border border-slate-300 animate-pulse rounded'>
-                                    </div>
-                                )
-                            })
-                             
-                        ) : (
-                          data.map((product,index)=>{
-                           return(
-                            <div key={product?._id+"Add To Cart Loading"} className='w-full bg-white h-32 my-2 border border-slate-300  rounded grid grid-cols-[128px,1fr]'>
-                                <div className='w-32 h-32 bg-slate-200'>
-                                    <img src={product?.productId?.productImage[0]} className='w-full h-full object-scale-down mix-blend-multiply' />
-                                </div>
-                                <div className='px-4 py-2 relative'>
-                                    {/**delete product */}
-                                    <div className='absolute right-0 text-red-600 rounded-full p-2 hover:bg-red-600 hover:text-white cursor-pointer' onClick={()=>deleteCartProduct(product?._id)}>
-                                        <MdDelete/>
-                                    </div>
+         {/* Divider */}
+            <hr className="border-t border-gray-200 my-8" />
 
-                                    <h2 className='text-lg lg:text-xl text-ellipsis line-clamp-1'>{product?.productId?.productName}</h2>
-                                    <p className='capitalize text-slate-500'>{product?.productId.category}</p>
-                                    <div className='flex items-center justify-between'>
-                                            <p className='text-black font-medium text-lg'>{displayINRCurrency(product?.productId?.sellingPrice)}</p>
-                                            <p className='text-slate-600 font-semibold text-lg'>{displayINRCurrency(product?.productId?.sellingPrice  * product?.quantity)}</p>
-                                    </div>
-                                    <div className='flex items-center gap-3 mt-1'>
-                                        <button className='border border-[#022636] text-[#022636] hover:bg-[#30C3C0] hover:text-white w-6 h-6 flex justify-center items-center rounded ' onClick={()=>decraseQty(product?._id,product?.quantity)}>-</button>
-                                        <span>{product?.quantity}</span>
-                                        <button className='border border-[#022636] text-[#022636] hover:bg-[#30C3C0] hover:text-white w-6 h-6 flex justify-center items-center rounded ' onClick={()=>increaseQty(product?._id,product?.quantity)}>+</button>
-                                    </div>
-                                </div>    
-                            </div>
-                           )
-                          })
-                        )
-                    }
-                </div>
-
-
-                {/***summary  */}
-                {
-                    data[0] && (
-                        <div className='mt-5 lg:mt-0 w-full max-w-sm'>
-                        {
-                            loading ? (
-                            <div className='h-36 bg-slate-200 border border-slate-300 animate-pulse'>
-                                
-                            </div>
-                            ) : (
-                                <div className='h-36 bg-white'>
-                                    <h2 className='text-white bg-[#022636] px-4 py-1'>Summary</h2>
-                                    <div className='flex items-center justify-between px-4 gap-2 font-medium text-lg text-slate-600'>
-                                        <p>Quantity</p>
-                                        <p>{totalQty}</p>
-                                    </div>
-
-                                    <div className='flex items-center justify-between px-4 gap-2 font-medium text-lg text-slate-600'>
-                                        <p>Total Price</p>
-                                        <p>{displayINRCurrency(totalPrice)}</p>    
-                                    </div>
-
-                                    <button className='bg-teal-600 p-2 text-white w-full mt-2' onClick={handlePayment}>Payment</button>
-
-                                </div>
-                            )
-                        }
-                </div>
-                    )
-                }
-               
-        </div>
-    </div>
+        <VerticalCardProduct category={"acuteck"} heading={"Acuteck"} />
+        <VerticalCard category={"ecotest"} heading={"Ecotest"}/>
+        <Footer/>
+        </>
   )
 }
 

@@ -10,7 +10,6 @@ import SummaryApi from './common';
 import Context from './context';
 import { useDispatch } from 'react-redux';
 import { setUserDetails } from './store/userSlice';
-import ChatbotWidget from './Components/ChatBot/ChatBot'; // Your Chatbot Widget
 
 function App() {
   const dispatch = useDispatch();
