@@ -3,32 +3,41 @@
     right: 20px;
     bottom: 20px;
     z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    transition: opacity 0.3s ease, filter 0.3s ease, transform 0.3s ease;
 }
 
-.chatbot-toggle-button {
-    background-color: #30C3C0; /* Primary color */
+.chatbot-toggle-button,
+.calculator-button {
+    background-color: #30C3C0;
     color: white;
     border: none;
     border-radius: 20px;
     padding: 10px 15px;
     cursor: pointer;
     display: flex;
-    align-items: center; /* Align icon and text vertically */
-    transition: background-color 0.3s;
+    align-items: center;
+    transition: background-color 0.3s, opacity 0.3s ease, filter 0.3s ease, transform 0.3s ease;
+    margin-bottom: 10px;
+    width: max-content;
 }
 
-.chatbot-toggle-button svg {
-    margin-right: 5px; /* Space between icon and text */
+.chatbot-toggle-button svg,
+.calculator-button svg {
+    margin-right: 5px;
 }
 
-.chatbot-toggle-button:hover {
-    background-color: #022636; /* Darker shade on hover */
+.chatbot-toggle-button:hover,
+.calculator-button:hover {
+    background-color: #022636;
 }
 
 .chatbot-close-button {
-    position: absolute; 
-    right: 10px; 
-    bottom: 1px; 
+    position: absolute;
+    right: 10px;
+    top: -9px;
     background-color: #022636;
     color: white;
     border: none;
@@ -36,101 +45,88 @@
     padding: 5px;
     cursor: pointer;
     display: flex;
-    align-items: center; /* Align icon vertically */
+    align-items: center;
     transition: background-color 0.3s;
 }
 
 .chatbot-close-button:hover {
-    background-color: #30C3C0; /* Darker shade on hover */
-}
-
-.chatbot-container {
-    width: 80vw; 
-    height: 80vh; 
-    top: 0;
-    z-index: 999;
-}
-
-.calculator-button {
-    background-color: #30C3C0; /* Primary color for calculators */
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 5px 20px;
-    margin: 5px 0; /* Spacing between buttons */
-    cursor: pointer;
-    display: flex;
-    align-items: center; /* Align icon and text vertically */
-    transition: background-color 0.3s, transform 0.3s; /* Add transition for hover effects */
-}
-
-.calculator-button svg {
-    margin-right: 5px; /* Space between icon and text */
-}
-
-.calculator-button:hover {
-    background-color: #022636; /* Darker shade on hover */
-    transform: scale(1.05); /* Slightly enlarge on hover */
-}
-
-/* Additional styling for the calculator containers */
-.bmi-calculator-container, .widget-calculator-container {
-    width: 100%; 
-    max-width: 500px; /* Set a max width for better display */
-    margin: 20px auto; /* Center the calculators */
-    border-radius: 10px; /* Optional: add rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: add a shadow for depth */
-    overflow: hidden; /* Ensure no overflow from iframes */
-}
-
-/* Iframe styling */
-.bmi-iframe, .widget-calculator-iframe {
-    width: 100%;
-    height: 100%; /* Full height of the container */
-    border: none; /* Remove border */
+    background-color: #30C3C0;
 }
 
 .popup-container {
     position: fixed;
-    top: 10%; 
-    left: 50%; 
-    transform: translateX(-50%); 
-    width: 50%; 
-    max-width: 400px; 
-    background-color: rgba(255, 255, 255, 0.9); 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 400px;
+    height: 80%;
+    max-height: 600px;
+    background-color: white;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
-    z-index: 2000; 
-    display: flex; 
-    flex-direction: column; 
-    overflow: hidden;
-    backdrop-filter: blur(1px); 
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
 }
 
 .popup-header {
-    background-color: #30C3C0; /* Header background color */
-    color: white; /* Header text color */
-    padding: 10px; /* Padding around header */
-    text-align: center; /* Center header text */
-}
-
-.popup-close-button {
-    background-color: transparent; /* Transparent for close button */
-    color: white; /* Close button text color */
-    border: none; /* No border */
-    cursor: pointer; /* Pointer cursor */
-    position: absolute; /* Absolute positioning */
-    top: 10px; /* Position from the top */
-    right: 10px; /* Position from the right */
+    background-color: #1CAEF5;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .popup-iframe {
-    width: 100%; /* Full width of the pop-up */
-    height: 80vh; /* Height of the iframe */
-    border: none; /* Remove border */
+    width: 100%;
+    height: calc(100% - 50px);
+    border: none;
 }
 
-.calculator-icon {
-    margin-right: 5px; /* Space between icon and text */
-    font-size: 1.2em; /* Increase icon size */
+.popup-close-button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
+
+@media (max-width: 600px) {
+    .chatbot-toggle-container {
+        right: 10px;
+        bottom: 10px;
+        transition: opacity 0.3s ease, filter 0.3s ease, transform 0.3s ease;
+    }
+
+    .chatbot-toggle-button,
+    .calculator-button {
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
+
+    .popup-container {
+        width: 95%;
+        height: 90%;
+    }
+
+    .chatbot-toggle-container.hidden {
+        opacity: 0;
+        filter: blur(5px);
+        transform: translateY(20px);
+        pointer-events: none;
+    }
+
+    .chatbot-toggle-container.visible {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+    .chatbot-close-button{
+        top: -100px;
+    }
+} 

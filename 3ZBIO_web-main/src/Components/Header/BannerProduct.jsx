@@ -97,7 +97,11 @@ export function SimpleSlider() {
                             <FaTimes />
                         </button>
                     </div>
-                    <iframe src="https://bmi-checker-two.vercel.app/" className="popup-iframe" scrolling="no"></iframe>
+                    <iframe 
+  src="https://bmi-checker-two.vercel.app/" 
+  className="popup-iframe" 
+  scrolling="yes">
+</iframe>
                 </div>
             )}
 
