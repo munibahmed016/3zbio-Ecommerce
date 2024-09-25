@@ -5,7 +5,6 @@ import Uzma from '../../assets/uzma-1-300x300-1.jpg';
 import Imran from "../../assets/imran-1-300x300-1.jpg";
 import Arsalan from "../../assets/arsalan-1-300x300-1.jpg";
 import Sheper from "../../assets/shahper-1-300x300-1.jpg";
-import Footer from '../Footer';
 
 
 const teamMembers = [
@@ -71,7 +70,6 @@ const OurTeam = () => {
                 ))}
             </div>
         </div>
-        <Footer/>
         </div>
         </>
     );

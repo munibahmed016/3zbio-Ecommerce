@@ -3,7 +3,6 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import productCategory from '../helpers/ProductCategory'
 import VerticalCard from '../Components/AllProducts/VerticalCard'
 import SummaryApi from '../common'
-import Footer from '../Components/Footer'
 
 const CategoryProduct = () => {
     const [data,setData] = useState([])
@@ -156,7 +155,6 @@ const CategoryProduct = () => {
        </div>
        
     </div>
-    <Footer/>
     </>
   )
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import Footer from '../Footer';
+
 
 const News = () => {
   return (
@@ -17,7 +17,7 @@ const News = () => {
         </p>
     </div>
 </div>
-<Footer/>
+
 </div>
     
   );

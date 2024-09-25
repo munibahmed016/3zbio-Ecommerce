@@ -7,7 +7,6 @@ import HealthMonitor from '../Components/HealthMonitor';
 import TestingKits from '../Components/TestingKits';
 import TestimonialComponent from '../Components/Testimonials';
 import PhoneNumber from '../Components/phone';
-import Footer from '../Components/Footer';
 
 const Home1 = () => {
   return (
@@ -21,7 +20,7 @@ const Home1 = () => {
       {/* <HorizontalCardProduct category={"ecotest"} heading={"Ecotest"}/> */}
       <TestimonialComponent/>
     <PhoneNumber/>
-    <Footer/>
+
     </div>
   );
 }

@@ -37,7 +37,8 @@ export const links = [
         {
           Head: "About Us",
           sublink: [
-            { name: "Our Team", link: "/AboutUs/OurTeam" },
+            { name: "Our Team", link: "/AboutUs/our-team" },
+            { name: "About Us", link: "/AboutUs/about-us" }
           ],
         },
       ],

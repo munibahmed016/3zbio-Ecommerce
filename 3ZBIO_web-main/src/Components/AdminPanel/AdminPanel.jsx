@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { FaRegCircleUser } from "react-icons/fa6";
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import ROLE from '../../common/role';
-import Footer from '../Footer';
 
 const AdminPanel = () => {
     const user = useSelector(state => state?.user?.user)
@@ -48,7 +47,6 @@ const AdminPanel = () => {
             <Outlet/>
         </main>
     </div>
-    <Footer/>
     </>
   )
 }

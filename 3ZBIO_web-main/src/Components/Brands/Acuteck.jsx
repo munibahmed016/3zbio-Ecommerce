@@ -1,13 +1,6 @@
 import React from 'react';
 import BPChecker from "../../assets/multiflex_6in1.png";
 import uteck from "../../assets/multigx_6in1-2.png";
-import Red from "../../assets/ghe-2in1.jpg";
-import Orange from "../../assets/guc-3in1.jpg";
-import Blue from "../../assets/gke-2in1.jpg";
-import Grey from "../../assets/gue-2in1.jpg";
-import White from "../../assets/meters-2.png";
-import Cholesterol from "../../assets/meters-1.png";
-import Footer from '../Footer';
 import VerticalCardProduct from '../Categories/VerticalCardsProducts';
 
 const Acuteck = () => {
@@ -57,7 +50,6 @@ const Acuteck = () => {
       <VerticalCardProduct category={"acuteck"} heading={"Acuteck"}/>
 
     </div>
-    <Footer />
   </div>
   )
 }

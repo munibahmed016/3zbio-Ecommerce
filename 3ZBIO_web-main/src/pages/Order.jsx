@@ -12,9 +12,10 @@ const Order = () => {
                 method: SummaryApi.getOrder.method,
                 credentials: 'include',
             });
-
+    
             const responseData = await response.json();
-
+            console.log("Fetched Data:", responseData); // Log the response data
+    
             if (responseData && Array.isArray(responseData.data)) {
                 setData(responseData.data); // Set the order data to state
             } else {

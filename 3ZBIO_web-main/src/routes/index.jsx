@@ -27,6 +27,7 @@ import SearchProduct from '../pages/SearchProduct';
 import Success from '../pages/Success';
 import Cancel from '../pages/Cancel';
 import Order from '../pages/Order';
+import Checkout from '../pages/Checkout';
 
 const router = createBrowserRouter([
   {
@@ -100,6 +101,10 @@ const router = createBrowserRouter([
     {
       path : 'cart',
       element : <Cart/>
+  },
+  {
+    path: 'checkout',
+    element: <Checkout/>
   },
   {
 path:'success',

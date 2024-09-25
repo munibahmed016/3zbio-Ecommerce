@@ -7,7 +7,6 @@ import DisplayImage from './DisplayImage';
 import { MdDelete } from "react-icons/md";
 import SummaryApi from '../../common';
 import {toast} from 'react-toastify'
-import Footer from '../Footer';
 
 const UploadProduct = ({
     onClose,
@@ -248,7 +247,6 @@ const UploadProduct = ({
         
 
     </div>
-    <Footer/>
     </>
   )
 }

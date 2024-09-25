@@ -5,7 +5,7 @@ import { FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate} from 'react-router-dom';
 import SummaryApi from '../../common';
 import { toast } from 'react-toastify';
-import Footer from '../Footer';
+
 import Context from '../../context';
 
 const Login = () => {
@@ -118,7 +118,7 @@ const Login = () => {
 
         </div>
     </section>
-    <Footer/>
+
     </>
   )
 }

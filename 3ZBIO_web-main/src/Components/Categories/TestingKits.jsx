@@ -1,5 +1,4 @@
 import React from 'react';
-import Footer from '../Footer';
 import Fertility from "../../assets/Testing-kits_03.png";
 import Infactious from "../../assets/Testing-kits_03-02.png";
 import Allergen from "../../assets/Testing-kits_03-03.png";
@@ -44,7 +43,6 @@ const TestingKits = () => {
         </div>
       </div>
       <VerticalCardProduct category={"ecotest"} heading={"Ecotest"}/>
-    <Footer />
   </div>
   )
 }

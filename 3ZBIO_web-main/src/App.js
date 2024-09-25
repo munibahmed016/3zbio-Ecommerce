@@ -10,6 +10,7 @@ import SummaryApi from './common';
 import Context from './context';
 import { useDispatch } from 'react-redux';
 import { setUserDetails } from './store/userSlice';
+import Footer from './Components/Footer';
 
 function App() {
   const dispatch = useDispatch();
@@ -55,6 +56,7 @@ function App() {
         <main>
           <Outlet />
         </main>
+        <Footer/>
 
         {/* Footer with chatbot toggle */}
         
