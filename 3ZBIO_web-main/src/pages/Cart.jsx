@@ -196,9 +196,9 @@ const Cart = () => {
                             <Link to={"/checkout"}>
                                 <button
                                 
-                                    className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                                    className="flex items-center justify-center rounded-md border border-transparent border-teal-500 hover:text-white px-6 py-3 text-base font-medium text-white bg-teal-500 hover:bg-[#022636]"
                                 >
-                                    Checkout
+                                    Shipping Address
                                 </button>
                                 </Link>
                             </div>
@@ -206,7 +206,7 @@ const Cart = () => {
                                 <p>
                                     or
                                     <Link to="/">
-                                        <button className="font-medium text-indigo-600 hover:text-indigo-500">
+                                        <button className="font-medium text-teal-500 hover:text-[#022636]">
                                             Continue Shopping &rarr;
                                         </button>
                                     </Link>

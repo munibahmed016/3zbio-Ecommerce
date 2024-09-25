@@ -1,9 +1,11 @@
 import React from 'react';
+import Zahid from "../../assets/zahid-300x300-1.jpg";
+import Huma from "../../assets/huma-3-300x300-1.jpg";
+import TeamSection from './TeamSection';
 
 const About = () => {
   return (
     <>
-    <h1>hello world</h1>
       {/* About Us Section */}
       <section className="bg-gradient-to-r from-blue-400 to-green-400 text-white py-16">
         <div className="container mx-auto px-4 text-center">
@@ -79,52 +81,22 @@ const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Founder 1 */}
             <div className="flex flex-col items-center">
-              <img src="founder1.jpg" alt="Founder" className="rounded-full w-32 h-32 mb-4"/>
+              <img src={Zahid} alt="Founder" className="rounded-full w-32 h-32 mb-4"/>
               <h3 className="text-xl font-bold">Zahid Ali Khan</h3>
-              <p>CEO, Stbio</p>
+              <p>Founder & CEO</p>
             </div>
             {/* Founder 2 */}
             <div className="flex flex-col items-center">
-              <img src="founder2.jpg" alt="Founder" className="rounded-full w-32 h-32 mb-4"/>
+              <img src={Huma} alt="Founder" className="rounded-full w-32 h-32 mb-4"/>
               <h3 className="text-xl font-bold">Huma Fazal</h3>
-              <p>COO, Stbio</p>
+              <p>CO-Founder</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Team Section */}
-      <section className="py-16 bg-blue-900 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-8">The Team</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Team member 1 */}
-            <div className="bg-white text-gray-900 p-6 rounded-lg shadow-lg">
-              <img src="team1.jpg" alt="Team Member" className="rounded-full w-24 h-24 mb-4 mx-auto"/>
-              <h3 className="text-xl font-bold">Uzma Kazmi</h3>
-              <p>Head of Marketing</p>
-            </div>
-            {/* Team member 2 */}
-            <div className="bg-white text-gray-900 p-6 rounded-lg shadow-lg">
-              <img src="team2.jpg" alt="Team Member" className="rounded-full w-24 h-24 mb-4 mx-auto"/>
-              <h3 className="text-xl font-bold">Arsalan Jauhar</h3>
-              <p>Sales & Ops Manager</p>
-            </div>
-            {/* Team member 3 */}
-            <div className="bg-white text-gray-900 p-6 rounded-lg shadow-lg">
-              <img src="team3.jpg" alt="Team Member" className="rounded-full w-24 h-24 mb-4 mx-auto"/>
-              <h3 className="text-xl font-bold">Imran Ali Khan</h3>
-              <p>Head of Operations</p>
-            </div>
-            {/* Team member 4 */}
-            <div className="bg-white text-gray-900 p-6 rounded-lg shadow-lg">
-              <img src="team4.jpg" alt="Team Member" className="rounded-full w-24 h-24 mb-4 mx-auto"/>
-              <h3 className="text-xl font-bold">Syed Shajper</h3>
-              <p>Head of IT</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <TeamSection/>
     </>
   );
 }

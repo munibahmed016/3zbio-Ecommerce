@@ -204,7 +204,7 @@ const ProductDetails = () => {
 
                 <div className='flex items-center gap-3 my-2'>
                   <button className='border-2 border-teal-500 rounded px-3 py-1 min-w-[120px] text-teal-500 font-medium hover:bg-teal-500 hover:text-white' onClick={(e)=>handleBuyProduct(e,data?._id)}>Buy</button>
-                  <button className='border-2 border-teal-500 rounded px-3 py-1 min-w-[120px] font-medium text-white bg-teal-500 hover:text-teal-600 hover:bg-white' onClick={(e)=>handleAddToCart(e,data?._id)}>Add To Cart</button>
+                  <button className='border-2 border-teal-500 rounded px-3 py-1 min-w-[120px] font-medium text-white bg-teal-500 hover:text-teal-600 hover:bg-[#022636]' onClick={(e)=>handleAddToCart(e,data?._id)}>Add To Cart</button>
                 </div>
 
                 <div>

@@ -1,10 +1,11 @@
 import React from 'react';
+import VerticalCardProduct from '../Categories/VerticalCardsProducts';
 
 const EcoTest = () => {
   return (
-    <div>
-      
-    </div>
+    <>
+      <VerticalCardProduct category={"ecotest"} heading={"Ecotest"}/>
+    </>
   );
 }
 

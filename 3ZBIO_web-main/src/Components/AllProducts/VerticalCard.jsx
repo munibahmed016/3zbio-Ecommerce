@@ -50,8 +50,8 @@ const VerticalCard = ({loading,data = []}) => {
                                  <p className='text-red-600 font-medium'>{ displayINRCurrency(product?.sellingPrice) }</p>
                                  <p className='text-slate-500 line-through'>{ displayINRCurrency(product?.price)  }</p>
                              </div>
-                             <button className='text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-0.5 rounded-full' onClick={(e)=>handleAddToCart(e,product?._id)}>Add to Cart</button>
-                         </div>
+                             <button className='border-2 border-teal-500 hover:border-[#022636] rounded px-3 py-1 min-w-[120px] font-medium text-white bg-teal-500 hover:text-white hover:bg-[#022636]' onClick={(e)=>handleAddToCart(e,data?._id)}>Add To Cart</button>
+                             </div>
                      </Link>
                  )
              })
