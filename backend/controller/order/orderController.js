@@ -1,24 +1,23 @@
 const orderModel = require('../../models/orderProductModal');
 
-const orderController = async(request, response)=>{
+const orderController = async (req, res) => {
     try {
-        const currentUserId = request.userId
+        const currentUserId = req.userId;
+        const orderList = await orderModel.find({ userId: currentUserId });
 
-        const orderList = await orderModel.find({userId : currentUserId})
-
-        response.json({
+        res.json({
             data: orderList,
             success: true,
             error: false,
-            message : "order List"
-        })
+            message: "Order List",
+        });
     } catch (err) {
-        response.status(500).json({
+        res.status(500).json({
             message: err.message || err,
+            success: false,
             error: true,
-            success: false
         });
     }
-}
+};
 
-module.exports = orderController
+module.exports = orderController;

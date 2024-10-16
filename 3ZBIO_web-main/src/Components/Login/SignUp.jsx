@@ -74,7 +74,7 @@ const SignUp = () => {
   return (
     <>
       <section id='sign-up'>
-        <div className='mx-auto container p-20'>
+        <div className='mx-auto container p-3 md:p-20'>
 
             <div className='bg-slate-100 p-5 w-full max-w-sm mx-auto'>
                     <div className='w-20 h-20 mx-auto relative overflow-hidden rounded-full'>

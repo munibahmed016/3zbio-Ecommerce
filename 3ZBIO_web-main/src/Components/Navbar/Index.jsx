@@ -136,23 +136,56 @@ const Navbar = () => {
 
           {/* Left side for Mobile */}
           <div className="md:hidden flex items-center space-x-4">
-            {/* User Icon */}
-            <Link to="/profile">
-              <FaRegCircleUser className="text-xl" />
-            </Link>
+            {/* Cart Icon (only visible when user is logged in) */}
+            {user?._id && (
+              <Link to={"/cart"} className='text-2xl relative'>
+                <span><FaShoppingCart /></span>
+                <div className='bg-red-400 text-white w-5 h-5 rounded-full p-1 flex items-center justify-center absolute -top-2 -right-3'>
+                  <p className='text-sm'>{context?.cartProductCount}</p>
+                </div>
+              </Link>
+            )}
 
-            {/* Cart Button */}
-            <Link to="/cart" className="relative">
-              <FaShoppingCart className="text-xl" />
-              <div className="bg-red-400 text-white w-5 h-5 rounded-full p-1 flex items-center justify-center absolute -top-2 -right-3">
-                <p className="text-sm">0</p>
+            {/* Always visible User Icon */}
+            <div className='relative flex justify-center'>
+              <div
+                className='text-3xl cursor-pointer relative flex justify-center'
+                onClick={() => setMenuDisplay(prev => !prev)}
+              >
+                {/* Render profile picture if logged in, otherwise show user icon */}
+                {user?._id && user?.profilePic ? (
+                  <img src={user?.profilePic} className='w-10 h-10 rounded-full' alt={user?.name} />
+                ) : (
+                  <FaRegCircleUser />
+                )}
               </div>
-            </Link>
 
-            {/* Login Button */}
-            <Link to="/login" className="px-3 py-0 rounded-full text-center text-white bg-[#277F58] hover:bg-[#1e6554]">
-              Login
-            </Link>
+              {/* Dropdown menu for logged in users */}
+              {menuDisplay && (
+                <div
+                  className='absolute bg-white top-full right-0 w-48 h-fit p-2 shadow-lg rounded z-[1000] transform translate-y-2'
+                  style={{ position: 'fixed', top: '50px' }}
+                >
+                  <nav>
+                    {user?.role === ROLE.ADMIN && (
+                      <Link to={"/admin-panel/all-products"} className='whitespace-nowrap block text-black hover:bg-slate-100 p-2'>
+                        Admin Panel
+                      </Link>
+                    )}
+                    <Link to={"/order"} className='whitespace-nowrap block text-black hover:bg-slate-100 p-2'>
+                      Order
+                    </Link>
+                  </nav>
+                  <div>
+                    {user?._id ? (
+                      <button onClick={handleLogout} className='px-3 py-1 rounded-full text-white bg-[#349E64] hover:bg-[#1e6554]'>Logout</button>
+                    ) : (
+                      <Link to={"/login"} className='px-3 py-1 rounded-full text-white bg-[#349E64] hover:bg-[#1e6554]'>Login</Link>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Center Logo */}
@@ -219,13 +252,13 @@ const Navbar = () => {
                       {user?.role === ROLE.ADMIN && (
                         <Link
                           to={"/admin-panel/all-products"}
-                          className='whitespace-nowrap block text-black hover:bg-slate-100 p-2'>
+                          className='whitespace-nowrap block text-black hover:bg-slate-100 p-2' onClick={()=>setMenuDisplay(preve => !preve)}>
                           Admin Panel
                         </Link>
                       )}
                       <Link
                         to={"/order"}
-                        className='whitespace-nowrap block text-black hover:bg-slate-100 p-2'>
+                        className='whitespace-nowrap block text-black hover:bg-slate-100 p-2' onClick={()=>setMenuDisplay(preve => !preve)}>
                         Order
                       </Link>
                     </nav>
