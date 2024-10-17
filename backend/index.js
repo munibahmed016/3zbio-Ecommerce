@@ -7,9 +7,10 @@ const router = require('./routes');
 
 const app = express();
 
-
+const backendUrl = process.env.FRONTEND_URL ;
+console.log(backendUrl);
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 3000, 
+    origin: process.env.FRONTEND_URL, 
     credentials: true,                
 }));
 

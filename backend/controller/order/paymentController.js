@@ -41,12 +41,12 @@ const paymentController = async (request, response) => {
                         currency: 'CAD',
                         product_data: {
                             name: item.productId.productName,
-                            images: images, // Ensure this is an array
+                            images: images, 
                             metadata: {
                                 productId: item.productId._id
                             }
                         },
-                        unit_amount: item.productId.sellingPrice * 100 // Stripe expects amounts in the smallest currency unit (e.g., cents)
+                        unit_amount: item.productId.sellingPrice * 100 
                     },
                     adjustable_quantity: {
                         enabled: true,
