@@ -1,31 +1,37 @@
 const express = require('express');
 const cors = require('cors');
-const cookieParser = require('cookie-parser'); 
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 const connectDB = require('./config/db');
 const router = require('./routes');
 
 const app = express();
 
-const backendUrl = process.env.FRONTEND_URL ;
-console.log(backendUrl);
+// CORS configuration
+const frontendUrl = process.env.FRONTEND_URL.trim();
 app.use(cors({
-    origin: process.env.FRONTEND_URL, 
-    credentials: true,                
+    origin: [frontendUrl, 'https://3zbio-ecommerce-3kay-n4wmpybqm-munibahmed016s-projects.vercel.app'],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
 app.use(express.json());
-app.use(cookieParser()); 
+app.use(cookieParser());
 
 // Routes
-app.use("/api", router);
+app.use('/api', router);
 
-// Set the PORT correctly
+// 404 Fallback
+app.use((req, res) => {
+    res.status(404).json({ error: 'Route not found' });
+});
+
+// Start the server
 const PORT = process.env.PORT || 8082;
-
 connectDB().then(() => {
     app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
+        console.log(`Server running on port ${PORT}`);
         console.log('Connected to DB');
     });
 });
