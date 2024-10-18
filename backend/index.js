@@ -8,7 +8,7 @@ const router = require('./routes')
 
 const app = express()
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000', 
+    origin: process.env.FRONTEND_URL, 
     credentials: true, 
   }));
 app.use(express.json())
@@ -16,7 +16,7 @@ app.use(cookieParser())
 
 app.use("/api",router)
 
-const PORT = 8082 || process.env.PORT
+// const PORT = 8082 || process.env.PORT
 
 
 connectDB().then(()=>{
