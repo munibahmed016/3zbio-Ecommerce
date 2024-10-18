@@ -5,6 +5,9 @@ import "slick-carousel/slick/slick-theme.css";
 import Progestrol from "../../assets/new_coming_soon_slide--scaled.jpg";
 import wideSlider from "../../assets/wide_slide-0-scaled.jpg";
 import Teaser from "../../assets/wide_slide-1-scaled.jpg";
+import Smp from "../../assets/smp.jpg"; // Small screen image 1
+import SmT from "../../assets/admin-ajax.jpg"; // Small screen image 2
+import Teas from "../../assets/teaser_slider_1-1.jpg"; // Small screen image 3
 import ChatbotWidget from "../ChatBot/ChatBot";
 import { FaComments, FaTimes } from 'react-icons/fa';
 import './carol.css';
@@ -14,6 +17,7 @@ export function SimpleSlider() {
     const [showBmiCalculator, setShowBmiCalculator] = useState(false);
     const [showIrCalculator, setShowIrCalculator] = useState(false);
     const [buttonsVisible, setButtonsVisible] = useState(true);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Track mobile state
     let previousScrollY = window.scrollY;
 
     const handleToggleChatbot = () => {
@@ -32,7 +36,6 @@ export function SimpleSlider() {
 
     const handleScroll = () => {
         const currentScrollY = window.scrollY;
-        const isMobile = window.innerWidth <= 768; // Adjust breakpoint for mobile
 
         if (isMobile) {
             if (currentScrollY > previousScrollY) {
@@ -46,24 +49,41 @@ export function SimpleSlider() {
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+
         return () => {
             window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleResize);
         };
-    }, []);
+    }, [isMobile]);
+
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        slidesToShow: 1, // Always show one slide at a time
+        slidesToScroll: 1,
+    };
+
+    const images = isMobile
+        ? [Smp, SmT, Teas] // Use small screen images for mobile
+        : [Progestrol, wideSlider, Teaser]; // Use large screen images for larger devices
 
     return (
         <>
             <div className="slider-container relative z-[-1] overflow-hidden">
-                <Slider>
-                    <div>
-                        <img src={Progestrol} alt="Slide 1" className="slider-image" />
-                    </div>
-                    <div>
-                        <img src={wideSlider} alt="Slide 2" className="slider-image" />
-                    </div>
-                    <div>
-                        <img src={Teaser} alt="Slide 3" className="slider-image" />
-                    </div>
+                <Slider {...settings}>
+                    {images.map((image, index) => (
+                        <div key={index}>
+                            <img src={image} alt={`Slide ${index + 1}`} className="slider-image" />
+                        </div>
+                    ))}
                 </Slider>
             </div>
 
@@ -85,7 +105,7 @@ export function SimpleSlider() {
                     <span className="calculator-icon">🏋️</span> BMI Calculator
                 </button>
                 <button className="calculator-button" onClick={handleToggleIrCalculator}>
-                    <span className="calculator-icon">💉</span> IR Calculator
+                    <span className="calculator-icon">💉</span> IR Calculator 
                 </button>
             </div>
 
@@ -97,11 +117,11 @@ export function SimpleSlider() {
                             <FaTimes />
                         </button>
                     </div>
-                    <iframe 
-  src="https://bmi-checker-two.vercel.app/" 
-  className="popup-iframe" 
-  scrolling="yes">
-</iframe>
+                    <iframe
+                        src="https://bmi-checker-two.vercel.app/"
+                        className="popup-iframe"
+                        scrolling="yes">
+                    </iframe>
                 </div>
             )}
 

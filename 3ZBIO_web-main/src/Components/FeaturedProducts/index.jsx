@@ -21,7 +21,7 @@ const FeaturedProducts = () => {
       </motion.h2>
       <br />
       <motion.p
-        className="text-[#C4A968] text-lg md:text-[25px] italic font-bold mt-2"
+        className="text-[#C4A968] text-md md:text-[25px] italic font-bold mt-2"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : -50 }}
         transition={{ duration: 0.5, delay: 0.2 }}
@@ -48,42 +48,55 @@ const FeaturedProducts = () => {
       </motion.p>
 
       <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Product 1 */}
-        <motion.div
-          className="p-4"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-        >
-          <img src={injection} alt="Product 1" className="mx-auto product-image" />
-          <h3 className="text-[#30BBF9] text-xl font-semibold mt-4">Coming Soon</h3>
-          <p className="text-gray-600 mt-2">Treat pain, Improve Joint Mobility</p>
-        </motion.div>
+  {/* Product 1 */}
+  <motion.div
+    className="p-4"
+    initial={{ opacity: 0, y: 50 }}
+    animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
+    transition={{ duration: 0.5, delay: 0.8 }}
+  >
+    <img
+      src={injection}
+      alt="Product 1"
+      className="mx-auto product-image w-56 md:w-64 lg:w-96" 
+    />
+    <h3 className="text-[#30BBF9] text-xl font-semibold mt-4">Coming Soon</h3>
+    <p className="text-gray-600 mt-2">Treat pain, Improve Joint Mobility</p>
+  </motion.div>
 
-        {/* Product 2 */}
-        <motion.div
-          className="p-4"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
-          transition={{ duration: 0.5, delay: 1.0 }}
-        >
-          <img src={progestrol} alt="Product 2" className="mx-auto product-image" />
-          <h3 className="text-[#30BBF9] text-xl font-semibold mt-4">Coming Soon</h3>
-          <p className="text-gray-600 mt-2">Reverse Insulin Resistance</p>
-        </motion.div>
+  {/* Product 2 */}
+  <motion.div
+    className="p-4"
+    initial={{ opacity: 0, y: 50 }}
+    animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
+    transition={{ duration: 0.5, delay: 1.0 }}
+  >
+    <img
+      src={progestrol}
+      alt="Product 2"
+      className="mx-auto product-image w-56 md:w-64 lg:w-96" 
+    />
+    <h3 className="text-[#30BBF9] text-xl font-semibold mt-4">Coming Soon</h3>
+    <p className="text-gray-600 mt-2">Reverse Insulin Resistance</p>
+  </motion.div>
 
-        {/* Product 3 */}
-        <motion.div
-          className="p-4"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
-          transition={{ duration: 0.5, delay: 1.2 }}
-        >
-          <img src={Golden} alt="Product 3" className="mx-auto product-image" />
-          <h3 className="text-[#30BBF9] text-xl font-semibold mt-4">Coming Soon</h3>
-          <p className="text-gray-600 mt-2">Instantly Repair Damaged Hair</p>
-        </motion.div>
-      </div>
+  {/* Product 3 */}
+  <motion.div
+    className="p-4"
+    initial={{ opacity: 0, y: 50 }}
+    animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
+    transition={{ duration: 0.5, delay: 1.2 }}
+  >
+    <img
+      src={Golden}
+      alt="Product 3"
+      className="mx-auto product-image w-56 md:w-64 lg:w-96" 
+    />
+    <h3 className="text-[#30BBF9] text-xl font-semibold mt-4">Coming Soon</h3>
+    <p className="text-gray-600 mt-2">Instantly Repair Damaged Hair</p>
+  </motion.div>
+</div>
+
     </section>
   );
 };

@@ -57,9 +57,9 @@ const HealthMonitor = () => {
             <img
               src={Acuteck}
               alt="Multi 6 in 1 Multi-Monitoring System"
-              className="w-full h-auto object-contain"
+              className="w-full h-40 md:h-48 lg:h-64 object-contain"  
             />
-            <Link to={"product/"} className="bg-white border-2 border-teal-500 text-teal-500 font-semibold py-2 px-4 rounded-full hover:bg-teal-500 hover:text-white transition-colors duration-300 w-32 mt-4">Shop now</Link>
+            <Link to={"product/66e15b2ebbc360ed70bab93b"} className="bg-white border-2 border-teal-500 text-teal-500 font-semibold py-2 px-4 rounded-full hover:bg-teal-500 hover:text-white transition-colors duration-300 w-32 mt-4">Shop now</Link>
           </motion.div>
 
           <motion.div
@@ -72,9 +72,8 @@ const HealthMonitor = () => {
             <img
               src={BPChecker}
               alt="MultiFlex 6 in 1 with BP & Pulse Test"
-              className="w-full h-auto object-contain"
-            />
-            <button className="bg-white border-2 border-teal-500 text-teal-500 font-semibold py-2 px-4 rounded-full hover:bg-teal-500 hover:text-white transition-colors duration-300 w-32 mt-4">Shop now</button>
+              className="w-full h-40 md:h-48 lg:h-64 object-contain"            />
+            <Link to={"product/66e15b2ebbc360ed70bab93b"} className="bg-white border-2 border-teal-500 text-teal-500 font-semibold py-2 px-4 rounded-full hover:bg-teal-500 hover:text-white transition-colors duration-300 w-32 mt-8">Shop now</Link>
           </motion.div>
         </div>
       </div>

@@ -11,12 +11,12 @@ import Allergen from "../../assets/Testing-kits_03-03.png";
 import DrugAbuse from "../../assets/Testing-kits_03-04.png";
 import HorizontalCardsProducts from "../AllProducts/HorizontalCardsProducts";
 
-const TestingKits = () => {
+export default function TestingKits() {
   const { ref: headingRef, inView: headingInView } = useInView({ triggerOnce: true });
   const { ref: productGridRef, inView: productGridInView } = useInView({ triggerOnce: true });
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       {/* Heading Section */}
       <motion.div
         ref={headingRef}
@@ -25,7 +25,7 @@ const TestingKits = () => {
         transition={{ duration: 0.5 }}
         className="text-center mb-8"
       >
-        <h1 className="text-3xl md:text-6xl mt-14 font-bold mb-4">Convenient Testing Kits</h1>
+        <h1 className="text-2xl md:text-3xl lg:text-6xl mt-8 md:mt-14 font-bold mb-4">Convenient Testing Kits</h1>
       </motion.div>
 
       <motion.div
@@ -33,76 +33,84 @@ const TestingKits = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: productGridInView ? 1 : 0, y: productGridInView ? 0 : 50 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="flex flex-wrap mt-8 justify-center gap-8"
+        className="grid grid-cols-2 md:flex md:flex-wrap md:justify-center gap-4 md:gap-8 mt-8"
       >
         {/* Fertility Tests */}
-        <div className="max-w-xs text-center">
-        <motion.img
-        src={Fertility}
-        alt="Fertility Tests"
-        className="w-full h-80 object-cover cursor-pointer mb-4"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: productGridInView ? 1 : 0, y: productGridInView ? 0 : 50 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-        whileHover={{ opacity: 0.6 }}
-      />
-      
-          <h4 className="font-semibold mb-2">Fertility Tests</h4>
+        <div className="text-center bg-pink-50 rounded-lg p-4 md:max-w-xs">
+          <motion.img
+            src={Fertility}
+            alt="Fertility Tests"
+            className="w-full h-32 sm:h-48 md:h-80 object-contain md:object-cover cursor-pointer mb-4"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: productGridInView ? 1 : 0, y: productGridInView ? 0 : 50 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            whileHover={{ scale: 1.05, opacity: 0.6 }}
+          />
+          <h4 className="font-semibold mb-2 text-sm sm:text-base md:text-lg">Fertility Tests</h4>
           <button
-            type="submit"
-            className="bg-white border-2 border-teal-500 text-teal-500 font-semibold py-2 px-4 rounded-full hover:bg-teal-500 hover:text-white transition-colors duration-300 w-full mt-2"
+            type="button"
+            className="bg-white border-2 border-pink-500 text-pink-500 font-semibold py-1 px-2 sm:py-2 sm:px-4 rounded-full hover:bg-pink-500 hover:text-white transition-colors duration-300 w-full mt-2 text-xs sm:text-sm"
           >
             Shop now
           </button>
         </div>
 
         {/* Infectious Disease Tests */}
-        <div className="max-w-xs text-center">
+        <div className="text-center bg-yellow-50 rounded-lg p-4 md:max-w-xs">
           <motion.img
             src={Infactious}
             alt="Infectious Disease Tests"
-            className="w-full h-80 cursor-pointer hover:opacity-70 object-cover mb-4"
+            className="w-full h-32 sm:h-48 md:h-80 object-contain md:object-cover cursor-pointer mb-4"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: productGridInView ? 1 : 0, y: productGridInView ? 0 : 50 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            whileHover={{ opacity: 0.6 }}
+            whileHover={{ scale: 1.05, opacity: 0.6 }}
           />
-          <h4 className="font-semibold mb-2">Infectious Disease Tests</h4>
-          <button className="bg-white border-2 border-teal-500 text-teal-500 font-semibold py-2 px-4 rounded-full hover:bg-teal-500 hover:text-white transition-colors duration-300 w-full mt-2">
+          <h4 className="font-semibold mb-2 text-sm sm:text-base md:text-lg">Infectious Disease Tests</h4>
+          <button
+            type="button"
+            className="bg-white border-2 border-yellow-500 text-yellow-500 font-semibold py-1 px-2 sm:py-2 sm:px-4 rounded-full hover:bg-yellow-500 hover:text-white transition-colors duration-300 w-full mt-2 text-xs sm:text-sm"
+          >
             Shop now
           </button>
         </div>
 
         {/* Allergen Tests */}
-        <div className="max-w-xs text-center">
+        <div className="text-center bg-green-50 rounded-lg p-4 md:max-w-xs">
           <motion.img
             src={Allergen}
             alt="Allergen Tests"
-            className="w-full h-80 cursor-pointer hover:opacity-70 object-cover mb-4"
+            className="w-full h-32 sm:h-48 md:h-80 object-contain md:object-cover cursor-pointer mb-4"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: productGridInView ? 1 : 0, y: productGridInView ? 0 : 50 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            whileHover={{ opacity: 0.6 }}
+            whileHover={{ scale: 1.05, opacity: 0.6 }}
           />
-          <h4 className="font-semibold mb-2">Allergen Tests</h4>
-          <button className="bg-white border-2 border-teal-500 text-teal-500 font-semibold py-2 px-4 rounded-full hover:bg-teal-500 hover:text-white transition-colors duration-300 w-full mt-2">
+          <h4 className="font-semibold mb-2 text-sm sm:text-base md:text-lg">Allergen Tests</h4>
+          <button
+            type="button"
+            className="bg-white border-2 border-green-500 text-green-500 font-semibold py-1 px-2 sm:py-2 sm:px-4 rounded-full hover:bg-green-500 hover:text-white transition-colors duration-300 w-full mt-2 text-xs sm:text-sm"
+          >
             Shop now
           </button>
         </div>
 
         {/* Drug of Abuse Tests */}
-        <div className="max-w-xs text-center">
+        <div className="text-center bg-blue-50 rounded-lg p-4 md:max-w-xs">
           <motion.img
             src={DrugAbuse}
             alt="Drug of Abuse Tests"
-            className="w-full h-80 cursor-pointer hover:opacity-70 object-cover mb-4"
+            className="w-full h-32 sm:h-48 md:h-80 object-contain md:object-cover cursor-pointer mb-4"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: productGridInView ? 1 : 0, y: productGridInView ? 0 : 50 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            whileHover={{ opacity: 0.6 }}
+            whileHover={{ scale: 1.05, opacity: 0.6 }}
           />
-          <h4 className="font-semibold mb-2">Drug of Abuse Tests</h4>
-          <button className="bg-white border-2 border-teal-500 text-teal-500 font-semibold py-2 px-4 rounded-full hover:bg-teal-500 hover:text-white transition-colors duration-300 w-full mt-2">
+          <h4 className="font-semibold mb-2 text-sm sm:text-base md:text-lg">Drug of Abuse Tests</h4>
+          <button
+            type="button"
+            className="bg-white border-2 border-blue-500 text-blue-500 font-semibold py-1 px-2 sm:py-2 sm:px-4 rounded-full hover:bg-blue-500 hover:text-white transition-colors duration-300 w-full mt-2 text-xs sm:text-sm"
+          >
             Shop now
           </button>
         </div>
@@ -116,40 +124,9 @@ const TestingKits = () => {
         className="text-center mt-12"
       >
         <h3 className="text-xl text-[#30BBF9] font-normal mb-2">Featured Products</h3>
-        <p className="text-3xl font-medium mb-8">Our Best-Selling Testing Kits</p>
-        {/* <div className="flex flex-wrap justify-center gap-8"> */}
-          {/* Product Cards */}
-          {/* {[
-            { image: ChickenGuniya, title: "Chikungunya IgG And IgM Rapid Test" },
-            { image: Dengue, title: "Dengue IgG and IgM and NS1 Combo Test" },
-            { image: Malaria, title: "Malaria Pf and Pan Rapid Test" },
-            { image: Typoid, title: "Typhoid Rapid Test" }
-          ].map((product, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: productGridInView ? 1 : 0, y: productGridInView ? 0 : 50 }}
-              transition={{ duration: 0.5, delay: 0.2 * index }}
-              className="group max-w-xs hover:shadow-xl transition-shadow duration-300 relative"
-            >
-              <img src={product.image} alt={product.title} className="w-full h-60 object-cover mb-4" />
-              <p className="font-semibold mb-2">{product.title}</p>
-              <div className="absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="text-center">
-                  <button className="bg-teal-500 text-white py-2 px-4 rounded-full m-1">Shop Now</button>
-                  <button className="bg-gray-200 text-gray-800 py-2 px-4 rounded-full m-1">View</button>
-                  <button className="bg-gray-200 text-gray-800 py-2 px-4 rounded-full m-1">View Description</button>
-                  <div className="mt-2 text-yellow-500">{"★".repeat(5)}</div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div> */}
-              <HorizontalCardsProducts category={"ecotest"} heading={"Ecotest"}/>
-
+        <p className="text-2xl md:text-3xl font-medium mb-8">Our Best-Selling Testing Kits</p>
+        <HorizontalCardsProducts category={"ecotest"} heading={"Ecotest"} />
       </motion.div>
     </div>
   );
-};
-
-export default TestingKits;
+}
