@@ -95,6 +95,28 @@
     right: 10px;
 }
 
+.video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.video-player {
+    width: 100%;
+    object-fit: cover;
+}
+
+.slider-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.slider-image {
+    width: 100%;
+    height: auto;
+}
+
 @media (max-width: 600px) {
     .chatbot-toggle-container {
         right: 10px;

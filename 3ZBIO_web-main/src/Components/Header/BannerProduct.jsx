@@ -8,6 +8,7 @@ import Teaser from "../../assets/wide_slide-1-scaled.jpg";
 import Smp from "../../assets/smp.jpg"; // Small screen image 1
 import SmT from "../../assets/admin-ajax.jpg"; // Small screen image 2
 import Teas from "../../assets/teaser_slider_1-1.jpg"; // Small screen image 3
+import Video from "../../assets/Pcvideo.mp4"; // Video for medium to larger screens
 import ChatbotWidget from "../ChatBot/ChatBot";
 import { FaComments, FaTimes } from 'react-icons/fa';
 import './carol.css';
@@ -73,18 +74,31 @@ export function SimpleSlider() {
 
     const images = isMobile
         ? [Smp, SmT, Teas] // Use small screen images for mobile
-        : [Progestrol, wideSlider, Teaser]; // Use large screen images for larger devices
+        : []; // No images for larger screens; we will display the video
 
     return (
         <>
             <div className="slider-container relative z-[-1] overflow-hidden">
-                <Slider {...settings}>
-                    {images.map((image, index) => (
-                        <div key={index}>
-                            <img src={image} alt={`Slide ${index + 1}`} className="slider-image" />
-                        </div>
-                    ))}
-                </Slider>
+                {isMobile ? (
+                    // Show slider on small screens
+                    <Slider {...settings}>
+                        {images.map((image, index) => (
+                            <div key={index}>
+                                <img src={image} alt={`Slide ${index + 1}`} className="slider-image" />
+                            </div>
+                        ))}
+                    </Slider>
+                ) : (
+                    // Show video on medium to larger screens
+                    <video
+                        src={Video}
+                        autoPlay
+                        muted
+                        loop
+                        className="video-player"
+                        style={{ width: '100%', height: 'auto' }} // Maintain aspect ratio
+                    />
+                )}
             </div>
 
             <div className={`chatbot-toggle-container ${buttonsVisible ? 'visible' : 'hidden'}`}>
