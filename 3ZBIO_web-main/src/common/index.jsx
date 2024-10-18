@@ -1,4 +1,5 @@
-const backendDomain = process.env.REACT_APP_BACKEND_URL ;
+// const backendDomain = process.env.REACT_APP_BACKEND_URL ;
+const backendDomain= "https://3zbio-ecommerce.vercel.app"
     console.log('Backend Domain:', backendDomain);
 
 const SummaryApi = {
