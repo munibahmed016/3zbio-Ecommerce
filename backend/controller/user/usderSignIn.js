@@ -24,15 +24,16 @@ async function userSignInController(req, res) {
             if (!process.env.TOKEN_SECRET_KEY) throw new Error("TOKEN_SECRET_KEY is not defined");
 
             const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET_KEY, { expiresIn: '8h' });
+            
 
             console.log("Generated Token:", token);
 
             // Cookie options
             const tokenOption = {
-                httpOnly: true,  // Make cookie inaccessible to client-side scripts
-                secure: process.env.NODE_ENV === 'production',  // Only send cookie over HTTPS in production
-                sameSite: 'Lax', // You might need this depending on your CORS setup
-            };
+                httpOnly : true,
+                secure : true,
+                sameSite : 'None'
+            }
 
             res.cookie("token", token, tokenOption).status(200).json({
                 message: "Login successfully",
