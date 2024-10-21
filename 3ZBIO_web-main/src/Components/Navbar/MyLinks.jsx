@@ -43,4 +43,17 @@ export const links = [
       },
     ],
   },
+  {
+    name: "Gallery",
+    submenu: true,
+    sublinks: [
+      {
+        Head: "About Us",
+        sublink: [
+          { name: "Testimonials", link: "/Gallery/Testimonials" },
+          { name: "News", link: "news" }
+        ],
+      },
+    ],
+  },
 ];

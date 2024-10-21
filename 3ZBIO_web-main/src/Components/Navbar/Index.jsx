@@ -197,7 +197,6 @@ const Navbar = () => {
           <ul className="hidden md:flex items-center space-x-6">
             <li><Link to="/" className="hover:text-teal-400">Home</Link></li>
             <NavLinks />
-            <li><Link to="/news" className="hover:text-teal-400">News</Link></li>
             <li><Link to="/contact" className="hover:text-teal-400">Contact</Link></li>
             <li className="relative">
               <div className='hidden lg:flex items-center w-full justify-between max-w-sm border rounded-full focus-within:shadow pl-2'>

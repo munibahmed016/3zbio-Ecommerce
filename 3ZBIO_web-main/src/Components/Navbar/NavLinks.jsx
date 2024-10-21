@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 import { links } from "./MyLinks";
 
 const NavLinks = () => {
-  const [heading, setHeading] = useState(""); // State to control main menu visibility
-  const [subHeading, setSubHeading] = useState(""); // State to control sub-menu visibility
+  const [heading, setHeading] = useState("");
+  const [subHeading, setSubHeading] = useState("");
 
   return (
     <>
       {links.map((link, index) => (
         <div key={index}>
-          <div className="px-3 text-left md:cursor-pointer group">
-          <h1
+          <div className="px-3 text-left md:cursor-pointer group ">
+            <h1
               className="py-4 flex justify-between items-center md:pr-0 pr-5 group"
               onClick={() => {
                 // Toggle main heading visibility
@@ -33,7 +33,7 @@ const NavLinks = () => {
             {link.submenu && (
               <div>
                 {/* Large Screen Submenu on Hover */}
-                <div className="absolute top-16 hidden group-hover:md:block hover:md:block">
+                <div className="absolute top-16 hidden group-hover:md:block hover:md:block z-[1]">
                   <div className="py-3">
                     <div
                       className="w-4 h-4 left-3 absolute mt-1 bg-white rotate-45"

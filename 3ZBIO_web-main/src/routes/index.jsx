@@ -28,6 +28,7 @@ import Success from '../pages/Success';
 import Cancel from '../pages/Cancel';
 import Order from '../pages/Order';
 import Checkout from '../pages/Checkout';
+import TestimonialsSection from '../Components/Gallery/Testimonials';
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: 'Brands/*',
         element: <Brands />,
+      },
+      {
+        path: 'Gallery/*',
+        element:<TestimonialsSection/>
       },
       {
         path: 'AboutUs/*',
