@@ -1,6 +1,6 @@
 import React from 'react';
 import 'remixicon/fonts/remixicon.css'; 
-import { motion } from 'framer-motion';  // Import motion from framer-motion
+import { motion } from 'framer-motion';  
 import Zara from "../../assets/dr-zara.jpg";
 import Shujra from "../../assets/dr_shujra.jpg";
 import Sitwat from "../../assets/dr_sitwat.jpg";
@@ -37,22 +37,20 @@ const TestimonialsSection = () => {
         Recommended By Professionals
         <span className="absolute w-16 h-1 bg-teal-600 left-1/2 transform -translate-x-1/2 bottom-0"></span>
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="flex overflow-x-auto space-x-8"> 
         {testimonials.map((testimonial, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}  // Animate from left or right
-            animate={{ opacity: 1, x: 0 }}  // Bring it to the center
-            transition={{ duration: 0.8, ease: "easeInOut", delay: index * 0.3 }}  // Smooth transition
-            className="relative bg-white p-8 rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:bg-teal-500 hover:text-white"
+            initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}  
+            animate={{ opacity: 1, x: 0 }}  
+            transition={{ duration: 0.8, ease: "easeInOut", delay: index * 0.3 }}  
+            className="relative min-w-[300px] bg-white p-8 rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:bg-teal-500 hover:text-white" 
           >
-            {/* Circle and quote icon */}
             <div className="absolute top-1 left-1 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-[#022636] rounded-full z-0 transition-all duration-1000 ease-in-out hover:w-96"></div>
             <span className="absolute top-1 left-1 text-5xl text-teal-500 z-10">
               <i className="ri-double-quotes-l"></i>
             </span>
 
-            {/* Testimonial content */}
             <h4 className="text-lg font-semibold text-black mt-16 mb-4 z-10 transition-colors duration-300 ease-in-out">
               {testimonial.quote}
             </h4>
@@ -60,7 +58,6 @@ const TestimonialsSection = () => {
               {testimonial.text}
             </p>
 
-            {/* User avatar */}
             <img
               className="w-24 h-24 rounded-full border-4 border-teal-600 mx-auto mb-4 transition-all duration-300 ease-in-out z-10"
               src={testimonial.img}
