@@ -48,7 +48,7 @@ export const links = [
     submenu: true,
     sublinks: [
       {
-        Head: "About Us",
+        Head: "Gallery",
         sublink: [
           { name: "Testimonials", link: "/Gallery/Testimonials" },
           { name: "News", link: "news" }

@@ -278,7 +278,6 @@ const Navbar = () => {
           <ul className="px-4 py-2">
             <li><Link to="/" className="block py-2 text-white hover:text-teal-400" onClick={toggleMenu}>Home</Link></li>
             <NavLinks />
-            <li><Link to="/news" className="block py-2 text-white hover:text-teal-400" onClick={toggleMenu}>News</Link></li>
             <li><Link to="/contact" className="block py-2 text-white hover:text-teal-400" onClick={toggleMenu}>Contact</Link></li>
             <li className="relative py-2">
               <div className='flex items-center w-full justify-between border rounded-full focus-within:shadow pl-2'>

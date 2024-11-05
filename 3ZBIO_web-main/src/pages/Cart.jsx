@@ -118,14 +118,14 @@ const Cart = () => {
                             <div>Loading...</div>
                         ) : data.length === 0 ? (
                             <>
-                            <div className="flex flex-col items-center justify-center">
-                                <img src={emptyCartImage} alt="Empty Cart" className="h-48 w-48 mb-4" />
-                                <h2 className="text-xl font-semibold">Your Cart is Currently Empty!</h2>
-                                {/* Divider */}
-                                <hr className="border-t border-gray-200 my-8" />
-                                <VerticalCardProduct category={"acuteck"} heading={"Acuteck"} />
-                                <VerticalCardProduct category={"ecotest"} heading={"Ecotest"} />
-                            </div>
+                                <div className="flex flex-col items-center justify-center">
+                                    <img src={emptyCartImage} alt="Empty Cart" className="h-48 w-48 mb-4" />
+                                    <h2 className="text-xl font-semibold">Your Cart is Currently Empty!</h2>
+                                    {/* Divider */}
+                                    <hr className="border-t border-gray-200 my-8" />
+                                    <VerticalCardProduct category={"acuteck"} heading={"Acuteck"} />
+                                    <VerticalCardProduct category={"ecotest"} heading={"Ecotest"} />
+                                </div>
                             </>
                         ) : (
                             <ul className="-my-6 divide-y divide-gray-200">
@@ -133,17 +133,17 @@ const Cart = () => {
                                     <li key={item._id} className="flex py-6">
                                         <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                             <img
-                                                src={item.productId.productImage[0]}
-                                                alt={item.productId.productName}
+                                                src={item.productId?.productImage?.[0] || 'defaultImage.jpg'}
+                                                alt={item.productId?.productName || 'Product'}
                                                 className="h-full w-full object-cover object-center"
                                             />
                                         </div>
                                         <div className="ml-4 flex flex-1 flex-col">
                                             <div className="flex justify-between text-base font-medium text-gray-900">
-                                                <h3>{item.productId.productName}</h3>
-                                                <p className="ml-4">{displayINRCurrency(item.productId.sellingPrice)}</p>
+                                                <h3>{item.productId?.productName || 'Unknown Product'}</h3>
+                                                <p className="ml-4">{displayINRCurrency(item.productId?.sellingPrice || 0)}</p>
                                             </div>
-                                            <p className="mt-1 text-sm text-gray-500">{item.productId.category}</p>
+                                            <p className="mt-1 text-sm text-gray-500">{item.productId?.category || 'No Category'}</p>
                                             <div className="flex flex-1 items-end justify-between text-sm">
                                                 <div className="flex items-center">
                                                     <label className="inline mr-5 text-sm font-medium leading-6 text-gray-900">Qty</label>
@@ -177,6 +177,7 @@ const Cart = () => {
                                     </li>
                                 ))}
                             </ul>
+
                         )}
                     </div>
                 </div>
@@ -193,13 +194,13 @@ const Cart = () => {
                                 <p>{totalQty} items</p>
                             </div>
                             <div className="mt-6">
-                            <Link to={"/checkout"}>
-                                <button
-                                
-                                    className="flex items-center justify-center rounded-md border border-transparent border-teal-500 hover:text-white px-6 py-3 text-base font-medium text-white bg-teal-500 hover:bg-[#022636]"
-                                >
-                                    Shipping Address
-                                </button>
+                                <Link to={"/checkout"}>
+                                    <button
+
+                                        className="flex items-center justify-center rounded-md border border-transparent border-teal-500 hover:text-white px-6 py-3 text-base font-medium text-white bg-teal-500 hover:bg-[#022636]"
+                                    >
+                                        Shipping Address
+                                    </button>
                                 </Link>
                             </div>
                             <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
