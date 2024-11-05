@@ -280,7 +280,7 @@ const ProductDetails = () => {
   }
 `}
             </style>
-            <div className="md:h-[calc(100vh-4rem)] md:overflow-y-auto  md:pr-4">
+            <div className="md:h-[calc(100vh-4rem)] md:overflow-y-auto md:pr-4">
               <div className="space-y-8">
                 {loading ? (
                   <div className="space-y-4">
@@ -344,6 +344,7 @@ const ProductDetails = () => {
                         </button>
                         <button
                           onClick={(e) => handleBuyProduct(e, data._id)}
+                          
                           className="flex-1 px-6 py-3 bg-white border border-gray-900 rounded-md hover:bg-gray-50 transition-colors"
                         >
                           BUY IT NOW
@@ -353,26 +354,12 @@ const ProductDetails = () => {
                   </>
                 )}
               </div>
-
               {/* Expandable Sections */}
               <div className="space-y-2 mt-8">
                 {[
                   { id: 'details', title: 'Product Details', content: data.description },
                   { id: 'ingredients', title: 'Ingredients', content: data.ingredients },
-                  {
-                    id: 'faqs',
-                    title: 'FAQs',
-                    content: (
-                      <div>
-                        {data.faqs?.map((faq, index) => (
-                          <div key={index} className="mb-4">
-                            <h4 className="font-medium mb-2">{faq.question}</h4>
-                            <p className="text-gray-600">{faq.answer}</p>
-                          </div>
-                        ))}
-                      </div>
-                    )
-                  },
+                  { id: 'faqs', title: 'FAQs', content: data.faqs },
                   { id: 'reviews', title: 'Customer Reviews', content: <ReviewSection /> },
                   { id: 'quality', title: 'Our Quality Promise', content: data.qualityPromise }
                 ].map(section => (
@@ -392,8 +379,21 @@ const ProductDetails = () => {
                         }`}
                     >
                       <div className="overflow-hidden">
-                        <ul className="px-6 py-4 border-t list-disc  border-gray-200">
-                          {section.content}
+                        <ul className="px-6 py-4 border-t list-disc border-gray-200">
+                          {section.id === 'faqs' ? (
+                            data.faqs?.map((faq, index) => (
+                              <li key={index} className="mb-4">
+                                <h4 className="font-medium mb-2">{faq.question}</h4>
+                                <p className="text-gray-600">{faq.answer}</p>
+                              </li>
+                            ))
+                          ) : section.id === 'reviews' ? (
+                            <li className='space-y-3 gap-2'>{section.content}</li>
+                          ) : (
+                            section.content?.split('\n').map((item, index) => (
+                              <li key={index}>{item}</li>
+                            ))
+                          )}
                         </ul>
                       </div>
                     </div>
@@ -444,6 +444,7 @@ const ProductDetails = () => {
         {showReviewForm && <ReviewForm />}
 
         {/* Recommended Products */}
+        <div className='mt-10 border-t'></div>
         {data.category && (
           <div className="mt-12">
             <CategroyWiseProductDisplay
