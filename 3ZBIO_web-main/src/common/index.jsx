@@ -86,6 +86,10 @@ const SummaryApi = {
     getOrder:{
         url: `${backendDomain}/api/order-list`,
         method: 'get'
+    },
+    addReview:{
+        url: `${backendDomain}/api/review`,
+        method: 'post'
     }
 }
 

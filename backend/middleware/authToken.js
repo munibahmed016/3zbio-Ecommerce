@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 
+
 async function authToken(req,res,next){
     try{
         const token = req.cookies?.token
@@ -21,8 +22,10 @@ async function authToken(req,res,next){
                 console.log("error auth", err)
             }
 
-            req.userId = decoded?._id
+            
 
+            req.userId = decoded?._id
+            req.user = decoded; 
             next()
         });
 

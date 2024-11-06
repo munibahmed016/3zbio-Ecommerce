@@ -25,6 +25,7 @@ const searchProduct = require('../controller/products/searchProducts');
 const paymentController = require('../controller/order/paymentController');
 const webhooks = require('../controller/order/webHooks');
 const orderController = require('../controller/order/orderController');
+const addReview = require('../controller/products/reviewController');
 
 router.post("/signup", userSignUpController)
 router.post("/signin", userSignInController)
@@ -53,7 +54,8 @@ router.get("/view-card-product",authToken,addToCartViewProduct)
 router.post("/update-cart-product",authToken,updateAddToCartProduct)
 router.post("/delete-cart-product",authToken,deleteAddToCartProduct)
 
-
+//Review Api
+router.post("/review",authToken,addReview)
 
 //payment and order
 router.post("/checkout", authToken, paymentController)
