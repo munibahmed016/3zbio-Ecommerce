@@ -82,7 +82,6 @@ const DeliveryInformation = () => {
         </section>
       </div>
     </div>
-    <Footer />
   </>
   )
 }

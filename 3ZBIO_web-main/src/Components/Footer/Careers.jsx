@@ -78,7 +78,6 @@ const Careers = () => {
         </section>
       </div>
     </div>
-    <Footer />
   </>
   )
 }

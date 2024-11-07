@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useContext, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { FaStar, FaStarHalf } from "react-icons/fa"
-import { ChevronLeft, ChevronRight, Minus, Plus, ChevronDown, X, Upload } from 'lucide-react'
+import { FaStar } from "react-icons/fa"
+import { ChevronLeft, ChevronRight, Minus, Plus, ChevronDown, X, Trash2 } from 'lucide-react'
 import SummaryApi from '../common'
 import displayINRCurrency from '../helpers/displayCurrency'
 import CategroyWiseProductDisplay from '../Components/AllProducts/catrgoryWiseProductDetails'
@@ -37,9 +37,9 @@ const ProductDetails = () => {
     rating: 5,
     name: '',
     email: '',
-    image: null
   })
   const [quantity, setQuantity] = useState(1)
+  const [isAdmin, setIsAdmin] = useState(false) // You should set this based on user role
 
   const params = useParams()
   const navigate = useNavigate()
@@ -90,6 +90,7 @@ const ProductDetails = () => {
     fetchUserAddToCart()
     navigate("/cart")
   }
+
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setReviewFormData(prevState => ({
@@ -99,7 +100,7 @@ const ProductDetails = () => {
   }
 
   const handleReviewSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
       const response = await fetch(SummaryApi.addReview.url, {
         method: SummaryApi.addReview.method,
@@ -113,38 +114,62 @@ const ProductDetails = () => {
           title: reviewFormData.title,
           comment: reviewFormData.comment,
         }),
-      });
+      })
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to submit review');
+        const errorData = await response.json()
+        throw new Error(errorData.message || 'Failed to submit review')
       }
 
-      const result = await response.json();
+      const result = await response.json()
       if (result.success) {
-        fetchProductDetails();
-        setShowReviewForm(false);
+        fetchProductDetails()
+        setShowReviewForm(false)
         setReviewFormData({
           title: '',
           comment: '',
           rating: 5,
           name: '',
           email: '',
-          image: null
-        });
+        })
       } else {
-        throw new Error(result.message || "Failed to submit review");
+        throw new Error(result.message || "Failed to submit review")
       }
     } catch (error) {
-      console.error('Error submitting review:', error);
+      console.error('Error submitting review:', error)
       if (error.message === 'User not authenticated') {
-        // Redirect to login page
-        navigate('/login');
+        navigate('/login')
       } else {
-        alert(error.message || "Failed to submit review. Please try again.");
+        alert(error.message || "Failed to submit review. Please try again.")
       }
     }
-  };
+  }
+
+  const handleDeleteReview = async (reviewId) => {
+    if (!isAdmin) return
+
+    try {
+      const response = await fetch(`${SummaryApi.deleteReview.url}/${reviewId}`, {
+        method: SummaryApi.deleteReview.method,
+        credentials: 'include',
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.message || 'Failed to delete review')
+      }
+
+      const result = await response.json()
+      if (result.success) {
+        fetchProductDetails()
+      } else {
+        throw new Error(result.message || "Failed to delete review")
+      }
+    } catch (error) {
+      console.error('Error deleting review:', error)
+      alert(error.message || "Failed to delete review. Please try again.")
+    }
+  }
 
   const toggleSection = (section) => {
     setActiveSection(activeSection === section ? null : section)
@@ -268,13 +293,23 @@ const ProductDetails = () => {
         {data.reviews && data.reviews.length > 0 ? (
           data.reviews.map((review, index) => (
             <div key={index} className="border-b pb-4">
-              <div className="flex items-center gap-2 mb-2">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <FaStar
-                    key={star}
-                    className={`w-4 h-4 ${star <= review.rating ? 'text-yellow-400' : 'text-gray-300'}`}
-                  />
-                ))}
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <FaStar
+                      key={star}
+                      className={`w-4 h-4 ${star <= review.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                    />
+                  ))}
+                </div>
+                {isAdmin && (
+                  <button
+                    onClick={() => handleDeleteReview(review._id)}
+                    className="text-red-500 hover:text-red-700"
+                  >
+                    <Trash2 className="w-5 h-5" />
+                  </button>
+                )}
               </div>
               <div className="flex items-center gap-2 mb-2">
                 <span className="font-medium">{review.user}</span>
@@ -355,23 +390,23 @@ const ProductDetails = () => {
 
           {/* Product Info and Expandable Sections */}
           <div className="md:col-span-7 mt-8 md:mt-0">
-          <style>
+            <style>
               {`
-  /* Hide scrollbar for WebKit-based browsers (Chrome, Safari, Edge) */
-  .md\\:overflow-y-auto::-webkit-scrollbar {
-    display: none;
-  }
+                /* Hide scrollbar for WebKit-based browsers (Chrome, Safari, Edge) */
+                .md\\:overflow-y-auto::-webkit-scrollbar {
+                  display: none;
+                }
 
-  /* Hide scrollbar for Firefox */
-  .md\\:overflow-y-auto {
-    scrollbar-width: none;
-  }
+                /* Hide scrollbar for Firefox */
+                .md\\:overflow-y-auto {
+                  scrollbar-width: none;
+                }
 
-  /* Hide scrollbar for other browsers */
-  .md\\:overflow-y-auto {
-    -ms-overflow-style: none;
-  }
-`}
+                /* Hide scrollbar for other browsers */
+                .md\\:overflow-y-auto {
+                  -ms-overflow-style: none;
+                }
+              `}
             </style>
             <div className="md:h-[calc(100vh-4rem)] md:overflow-y-auto md:pr-4">
               <div className="space-y-8">
@@ -403,7 +438,6 @@ const ProductDetails = () => {
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Quantity:</label>
                   <div className="flex items-center gap-2">
-                    
                     <button
                       className="p-2 border border-gray-300 rounded-md"
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}

@@ -80,7 +80,6 @@ const OrderStatus = () => {
           </section>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

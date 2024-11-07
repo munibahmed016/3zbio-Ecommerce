@@ -148,7 +148,6 @@ const ReturnRefund = () => {
           </section>
         </div>
       </div>
-      <Footer />
     </>
   )
 }

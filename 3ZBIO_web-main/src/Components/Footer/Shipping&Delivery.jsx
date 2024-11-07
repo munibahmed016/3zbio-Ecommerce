@@ -81,7 +81,6 @@ const ShippingDelivery = () => {
           </section>
         </div>
       </div>
-      <Footer/>
     </>
   )
 }

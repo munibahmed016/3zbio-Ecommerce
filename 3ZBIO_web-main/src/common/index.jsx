@@ -90,6 +90,10 @@ const SummaryApi = {
     addReview:{
         url: `${backendDomain}/api/review`,
         method: 'post'
+    },
+    deleteReview: {
+        url: `${backendDomain}/api/delete-review`,  
+        method: 'delete'
     }
 }
 

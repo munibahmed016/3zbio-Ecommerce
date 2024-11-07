@@ -8,7 +8,6 @@ const productCategory = [
   { id: 7, label: "Institutional Devices", value: "devices" },
   { id: 8, label: "Acuteck", value: "acuteck" },
   { id: 9, label: "Ecotest", value: "ecotest" },
-  { id: 10, label: "Our Team", value: "our_team"}
 ]
 
 

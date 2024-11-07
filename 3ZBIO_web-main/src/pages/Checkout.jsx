@@ -400,7 +400,7 @@ function Checkout() {
                                         onClick={handlePayment}
                                         className="flex items-center justify-center rounded-md border border-transparent border-teal-500 hover:text-white px-6 py-3 text-base font-medium text-white bg-teal-500 hover:bg-[#022636]"
                                     >
-                                       Pay Now
+                                        Pay Now
                                     </button>
                                 </div>
                                 <div className="mt-6 flex justify-center text-center text-sm text-gray-500">

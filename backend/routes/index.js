@@ -26,6 +26,7 @@ const paymentController = require('../controller/order/paymentController');
 const webhooks = require('../controller/order/webHooks');
 const orderController = require('../controller/order/orderController');
 const addReview = require('../controller/products/reviewController');
+const deleteReview = require('../controller/products/deleteReview');
 
 router.post("/signup", userSignUpController)
 router.post("/signin", userSignInController)
@@ -56,6 +57,7 @@ router.post("/delete-cart-product",authToken,deleteAddToCartProduct)
 
 //Review Api
 router.post("/review",authToken,addReview)
+router.delete('/delete-review/:reviewId',authToken,deleteReview)
 
 //payment and order
 router.post("/checkout", authToken, paymentController)
