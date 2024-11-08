@@ -1,65 +1,92 @@
-import React, { useContext, useState } from 'react';
+'use client'
+
+import React, { useContext, useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   FaBars, FaTimes, FaPhoneAlt, FaEnvelope, FaFacebookF,
-  FaInstagram, FaYoutube, FaSearch, FaShoppingCart
+  FaInstagram, FaYoutube, FaShoppingCart
 } from 'react-icons/fa';
 import { FaRegCircleUser } from "react-icons/fa6";
+import { Search, X } from 'lucide-react';
 import NavLinks from './NavLinks';
 import { useDispatch, useSelector } from 'react-redux';
 import SummaryApi from '../../common';
 import { toast } from 'react-toastify';
 import { setUserDetails } from '../../store/userSlice';
 import Context from '../../context';
-import { GrSearch } from "react-icons/gr";
 import ROLE from '../../common/role';
 import Logo from "../../assets/logo1.png"
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [menuDisplay, setMenuDisplay] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [isDesktopSearchOpen, setIsDesktopSearchOpen] = useState(false);
 
-  const user = useSelector(state => state?.user?.user)
-  console.log("user header", user);
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const [menuDisplay, setMenuDisplay] = useState(false)
-  const context = useContext(Context)
-  const searchInput = useLocation()
-  const URLSearch = new URLSearchParams(searchInput?.search)
-  const searchQuery = URLSearch.getAll("q")
-  const [search, setSearch] = useState(searchQuery)
+  const user = useSelector(state => state?.user?.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const context = useContext(Context);
+  const location = useLocation();
+
+  // const trendingSearches = [
+  //   "biotin plus",
+  //   "dermazon",
+  //   "butex",
+  //   "calcium",
+  //   "vitamax"
+  // ];
+
+  useEffect(() => {
+    const searchProducts = async () => {
+      if (searchQuery.length > 0) {
+        try {
+          const response = await fetch(`${SummaryApi.searchProduct.url,
+            {method:SummaryApi.searchProduct.method}
+          }?q=${searchQuery}`);
+          const data = await response.json();
+          setSearchResults(data.products || []);
+        } catch (error) {
+          console.error('Search error:', error);
+          setSearchResults([]);
+        }
+      } else {
+        setSearchResults([]);
+      }
+    };
+
+    const debounceTimer = setTimeout(searchProducts, 300);
+    return () => clearTimeout(debounceTimer);
+  }, [searchQuery]);
 
   const handleLogout = async () => {
     const fetchData = await fetch(SummaryApi.logout_user.url, {
       method: SummaryApi.logout_user.method,
       credentials: 'include'
-    })
+    });
 
-    const data = await fetchData.json()
+    const data = await fetchData.json();
 
     if (data.success) {
-      toast.success(data.message)
-      dispatch(setUserDetails(null))
-      navigate("/")
+      toast.success(data.message);
+      dispatch(setUserDetails(null));
+      navigate("/");
     }
 
     if (data.error) {
-      toast.error(data.message)
+      toast.error(data.message);
     }
-  }
+  };
 
-  const handleSearch = (e) => {
-    const { value } = e.target
-    setSearch(value)
-
-    if (value) {
-      navigate(`/search?q=${value}`)
-    } else {
-      navigate("/search")
+  const handleSearch = (query) => {
+    if (query) {
+      navigate(`/search?q=${query}`);
+      setIsSearchOpen(false);
+      setIsDesktopSearchOpen(false);
     }
-  }
+  };
 
   const toggleMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -69,10 +96,95 @@ const Navbar = () => {
     setIsSearchOpen(!isSearchOpen);
   };
 
-  const handleSearchSubmit = (event) => {
-    event.preventDefault();
-    console.log("Search query:", searchQuery);
+  const toggleDesktopSearch = () => {
+    setIsDesktopSearchOpen(!isDesktopSearchOpen);
   };
+
+  const SearchPopup = ({ isDesktop = false }) => (
+    <div className={`fixed inset-0 z-50 flex items-start justify-center ${isDesktop ? 'pt-20' : ''}`}>
+      <div className="relative w-full max-w-2xl bg-white rounded-lg shadow-xl mx-4">
+        <div className="p-6">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-xl font-semibold text-gray-900">Search</h2>
+            <button 
+              onClick={isDesktop ? toggleDesktopSearch : toggleSearch}
+              className="text-gray-500 hover:text-gray-700"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+          
+          <div className="relative mb-6">
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') {
+                  handleSearch(searchQuery);
+                }
+              }}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-lg"
+              autoFocus
+            />
+            <button
+              onClick={() => handleSearch(searchQuery)}
+              className="absolute right-2 top-2 p-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors"
+            >
+              <Search className="h-5 w-5" />
+            </button>
+          </div>
+
+          {searchResults.length > 0 && (
+            <div className="mb-6">
+              <h3 className="text-sm font-semibold text-gray-900 mb-3">SEARCH RESULTS</h3>
+              <div className="space-y-2">
+                {searchResults.map((product) => (
+                  <div 
+                    key={product.id}
+                    className="p-2 hover:bg-gray-50 rounded-lg cursor-pointer"
+                    onClick={() => {
+                      navigate(`/product/${product.id}`);
+                      setIsSearchOpen(false);
+                      setIsDesktopSearchOpen(false);
+                    }}
+                  >
+                    <div className="flex items-center gap-3">
+                      <img 
+                        src={product.image} 
+                        alt={product.name} 
+                        className="w-12 h-12 object-cover rounded"
+                      />
+                      <div>
+                        <h4 className="font-medium text-gray-900">{product.name}</h4>
+                        <p className="text-sm text-gray-500">${product.price}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* <div>
+            <h3 className="text-sm font-semibold text-gray-900 mb-3">TRENDING NOW</h3>
+            <div className="flex flex-wrap gap-2">
+              {trendingSearches.map((term) => (
+                <button
+                  key={term}
+                  onClick={() => handleSearch(term)}
+                  className="px-4 py-2 bg-gray-100 rounded-full text-sm text-gray-600 hover:bg-gray-200 transition-colors"
+                >
+                  {term}
+                </button>
+              ))}
+            </div>
+          </div> */}
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <header className="bg-[#022636]">
@@ -186,8 +298,11 @@ const Navbar = () => {
             <img src={Logo} alt="" className='w-36 h-12 md:w-44 md:h-14 pr-6 mr-6 md:mr-0 md:pr-10'/>
           </Link>
 
-          {/* Right side for Mobile (Hamburger) */}
-          <div className="md:hidden">
+          {/* Right side for Mobile (Search and Hamburger) */}
+          <div className="md:hidden flex items-center space-x-4">
+            <button onClick={toggleSearch} className="text-white">
+              <Search className="w-6 h-6" />
+            </button>
             <button onClick={toggleMenu}>
               <FaBars className="text-xl mt-2" />
             </button>
@@ -198,14 +313,6 @@ const Navbar = () => {
             <li><Link to="/" className="hover:text-teal-400">Home</Link></li>
             <NavLinks />
             <li><Link to="/contact" className="hover:text-teal-400">Contact</Link></li>
-            <li className="relative">
-              <div className='hidden lg:flex items-center w-full justify-between max-w-sm border rounded-full focus-within:shadow pl-2'>
-                <input type='text' placeholder='search product here...' className='w-full outline-none bg-transparent' onChange={handleSearch} value={search} />
-                <div className='text-lg min-w-[50px] h-8 bg-teal-500 flex items-center justify-center rounded-r-full '>
-                  <GrSearch />
-                </div>
-              </div>
-            </li>
 
             {user?._id && (
               <Link to={"/cart"} className='text-2xl relative'>
@@ -239,13 +346,13 @@ const Navbar = () => {
                       {user?.role === ROLE.ADMIN && (
                         <Link
                           to={"/admin-panel/all-products"}
-                          className='whitespace-nowrap block text-black hover:bg-slate-100 p-2' onClick={()=>setMenuDisplay(preve => !preve)}>
+                          className='whitespace-nowrap block text-black hover:bg-slate-100 p-2' onClick={()=>setMenuDisplay(prev => !prev)}>
                           Admin Panel
                         </Link>
                       )}
                       <Link
                         to={"/order"}
-                        className='whitespace-nowrap block text-black hover:bg-slate-100 p-2' onClick={()=>setMenuDisplay(preve => !preve)}>
+                        className='whitespace-nowrap block text-black hover:bg-slate-100 p-2' onClick={()=>setMenuDisplay(prev => !prev)}>
                         Order
                       </Link>
                     </nav>
@@ -261,45 +368,55 @@ const Navbar = () => {
                 )}
               </div>
             </div>
+            {/* Search icon for desktop */}
+            <button 
+              onClick={toggleDesktopSearch} 
+              className="flex items-center gap-2 px-4 py-2 text-white hover:text-teal-400 transition-colors"
+            >
+              <Search className="w-5 h-5" />
+              <span className="text-sm">Search</span>
+            </button>
           </ul>
         </div>
 
         {/* Mobile Menu */}
         <div 
-          className={`fixed top-0 left-0 w-64 h-full bg-[#071A2B] transform ${
+          className={`fixed top-0 left-0 w-[90%] sm:w-[400px] h-full bg-white transform ${
             isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
           } transition-transform duration-300 ease-in-out z-50 overflow-y-auto`}
         >
           <div className="flex justify-end p-4">
-            <button onClick={toggleMenu}>
-              <FaTimes className="text-xl text-white" />
+            <button onClick={toggleMenu} className="text-gray-500 hover:text-gray-700">
+              <X className="w-6 h-6" />
             </button>
           </div>
-          <ul className="px-4 py-2">
-            <li><Link to="/" className="block py-2 text-white hover:text-teal-400" onClick={toggleMenu}>Home</Link></li>
-            <NavLinks />
-            <li><Link to="/contact" className="block py-2 text-white hover:text-teal-400" onClick={toggleMenu}>Contact</Link></li>
-            <li className="relative py-2">
-              <div className='flex items-center w-full justify-between border rounded-full focus-within:shadow pl-2'>
-                <input 
-                  type='text' 
-                  placeholder='Search products...' 
-                  className='w-full px-2 py-1 bg-transparent text-white rounded-l-full outline-none' 
-                  onChange={handleSearch} 
-                  value={search}
-                />
-                <div className='text-lg min-w-[50px] h-8 bg-teal-500 flex items-center justify-center rounded-r-full'>
-                  <GrSearch className="text-white" />
-                </div>
-              </div>
-            </li>
-          </ul>
+          <NavLinks isMobile={true} onLinkClick={toggleMenu} />
         </div>
+
+        {/* Mobile Search Sidebar */}
+        {isSearchOpen && (
+          <>
+            <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={toggleSearch} />
+            <div className="fixed top-0 right-0 w-[90%] sm:w-[400px] h-full bg-white z-50 overflow-y-auto transform transition-transform duration-300 ease-in-out">
+              <SearchPopup />
+            </div>
+          </>
+        )}
+
+        {/* Desktop Search Popup */}
+        {isDesktopSearchOpen && (
+          <>
+            <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={toggleDesktopSearch} />
+            <SearchPopup isDesktop={true} />
+          </>
+        )}
+
+        {/* Overlay for mobile menu */}
         {isMobileMenuOpen && (
           <div 
             className="fixed inset-0 bg-black bg-opacity-50 z-40"
             onClick={toggleMenu}
-          ></div>
+          />
         )}
       </nav>
     </header>
