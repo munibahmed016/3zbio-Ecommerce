@@ -51,7 +51,8 @@ export const links = [
         Head: "Gallery",
         sublink: [
           { name: "Testimonials", link: "/Gallery/Testimonials" },
-          { name: "News", link: "news" }
+          { name: "News", link: "news" },
+          {name: "Clinical Trail", link: "/ClinicalTrail/ClinicalTrail"}
         ],
       },
     ],

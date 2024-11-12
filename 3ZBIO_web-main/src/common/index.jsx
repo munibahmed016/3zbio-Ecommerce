@@ -1,5 +1,5 @@
-// const backendDomain = "http://localhost:8082" ;
-const backendDomain= "https://3zbio-ecommerce.vercel.app"
+const backendDomain = "http://localhost:8082" ;
+// const backendDomain= "https://3zbio-ecommerce.vercel.app"
     console.log('Backend Domain:', backendDomain);
 
 const SummaryApi = {

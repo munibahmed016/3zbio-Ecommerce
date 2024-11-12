@@ -56,17 +56,7 @@ function App() {
         <main>
           <Outlet />
         </main>
-        <Footer/>
-
-        {/* Footer with chatbot toggle */}
-        
-          {/* Chatbot Button can also be here */}
-          {/* <div className="footer-chatbot-button">
-            <button className="chatbot-footer-button" onClick={() => setShowChatbot(!showChatbot)}>
-              Chat With Doctor
-            </button>
-          </div> */}
-        
+        <Footer/>        
       </Context.Provider>
     </>
   );
