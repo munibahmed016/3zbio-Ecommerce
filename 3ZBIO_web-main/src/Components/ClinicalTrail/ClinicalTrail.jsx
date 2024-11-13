@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Banner from "../../assets/banner.jpg";
 import Circle from "../../assets/glass_circle.png";
-import prog from "../../assets/1_prog.png"
+import prog from "../../assets/1_prog.png";
 
 const ClinicalTrail = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -10,7 +10,7 @@ const ClinicalTrail = () => {
     const closeModal = () => setIsModalOpen(false);
 
     return (
-        <div className="bg-blue-50 min-h-screen flex flex-col items-center py-10 px-4 md:px-20">
+        <div className="bg-blue-50 flex flex-col items-center py-10 px-4 md:px-20">
             {/* Banner Section */}
             <header className="text-center mb-10">
                 <img src={Banner} alt="ProGsterol Banner" className="w-full max-w-5xl mx-auto" />
@@ -18,7 +18,7 @@ const ClinicalTrail = () => {
 
             <div className="flex flex-col lg:flex-row items-center lg:items-start lg:justify-between w-full max-w-5xl">
                 {/* Content Section */}
-                <div className="lg:w-1/2 lg:pr-10 mb-8 lg:mb-0 text-center lg:text-left">
+                <div className="lg:w-1/2 lg:pr-10 mb-8 lg:mb-0 mt-6 text-center lg:text-left">
                     <h2 className="text-2xl font-bold text-blue-800 mb-4">
                         ProGsterol - Reverse Insulin Resistance
                     </h2>
@@ -34,9 +34,10 @@ const ClinicalTrail = () => {
                 </div>
 
                 {/* Image Section */}
-                <div className="flex lg:w-1/2 justify-center lg:justify-end items-center gap-10">
-                    <img src={Circle} alt="Progsterol Product" className="w-40 lg:w-48" />
-                    <img src={prog} alt="Progsterol Stick" className="w-40 lg:w-48" />
+                <div className="flex flex-col items-center lg:w-1/2 text-center gap-4">
+                    <img src={Circle} alt="Progsterol Product" className="w-56 lg:w-64" />
+                    <h2 className="text-lg font-semibold text-blue-800">Just 1 stick a day!</h2>
+                    <p className="text-gray-700">For Healthy Glucose Level with ProGsterol</p>
                 </div>
             </div>
 
