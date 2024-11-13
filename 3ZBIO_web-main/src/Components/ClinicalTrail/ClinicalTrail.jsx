@@ -19,15 +19,15 @@ const ClinicalTrail = () => {
             <div className="flex flex-col lg:flex-row items-center lg:items-start lg:justify-between w-full max-w-5xl">
                 {/* Content Section */}
                 <div className="lg:w-1/2 lg:pr-10 mb-8 lg:mb-0 mt-6 text-center lg:text-left">
-                    <h2 className="text-2xl font-bold text-blue-800 mb-4">
+                    <h2 className="text-2xl font-bold text-[#09346b] mb-4">
                         ProGsterol - Reverse Insulin Resistance
                     </h2>
-                    <p className="text-gray-700 mb-6">
+                    <p className="text-black mb-6">
                         ProGsterol's main ingredient Deglusterol is the world's first new dietary Ingredient (NDI) as a synthetic peptide approved by U.S FDA. It increases the sensitivity of insulin receptors and affects cells with insulin resistance. If you want to learn more about ProGsterol, please click the button below.
                     </p>
                     <button
                         onClick={openModal}
-                        className="bg-blue-500 text-white py-2 px-6 rounded-lg shadow-md hover:bg-blue-600 transition duration-300 ease-in-out"
+                        className="bg-[#09346b] text-white py-2 px-6 rounded-lg shadow-md hover:bg-[#0f273a] transition duration-300 ease-in-out"
                     >
                         View Clinical Trial PDF
                     </button>
@@ -36,8 +36,8 @@ const ClinicalTrail = () => {
                 {/* Image Section */}
                 <div className="flex flex-col items-center lg:w-1/2 text-center gap-4">
                     <img src={Circle} alt="Progsterol Product" className="w-56 lg:w-64" />
-                    <h2 className="text-lg font-semibold text-blue-800">Just 1 stick a day!</h2>
-                    <p className="text-gray-700">For Healthy Glucose Level with ProGsterol</p>
+                    <h2 className="text-xl font-semibold text-blue-800">Just 1 stick a day!</h2>
+                    <p className="text-black">For Healthy Glucose Level with ProGsterol</p>
                 </div>
             </div>
 
