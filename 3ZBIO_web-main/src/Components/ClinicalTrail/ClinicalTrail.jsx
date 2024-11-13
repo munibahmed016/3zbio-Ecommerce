@@ -13,12 +13,12 @@ const ClinicalTrail = () => {
         <div className="bg-blue-50 flex flex-col items-center py-10 px-4 md:px-20">
             {/* Banner Section */}
             <header className="text-center mb-10">
-                <img src={Banner} alt="ProGsterol Banner" className="w-full max-w-5xl mx-auto" />
+                <img src={Banner} alt="ProGsterol Banner" className="w-full max-w-5xl    mx-auto" />
             </header>
 
             <div className="flex flex-col lg:flex-row items-center lg:items-start lg:justify-between w-full max-w-5xl">
                 {/* Content Section */}
-                <div className="lg:w-1/2 lg:pr-10 mb-8 lg:mb-0 mt-6 text-center lg:text-left">
+                <div className="lg:w-1/2 lg:pr-10 mb-8 lg:mb-0 md:mt-6 text-center lg:text-left">
                     <h2 className="text-2xl font-bold text-[#09346b] mb-4">
                         ProGsterol - Reverse Insulin Resistance
                     </h2>
